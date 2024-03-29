@@ -20,7 +20,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={twMerge("flex", inter.className)}>
         <Sidebar />
-        <main>{children}</main>
+        <main className="flex-1">{children}</main>
       </body>
     </html>
   );
