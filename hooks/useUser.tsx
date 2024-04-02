@@ -21,6 +21,7 @@ export const UserContext = createContext<UserContextType | undefined>(
   undefined
 );
 
+// provider : we can call states everywhere inside the provider
 export const MyUserContextProvider = (props: Props) => {
   const {
     session,
@@ -79,6 +80,7 @@ export const MyUserContextProvider = (props: Props) => {
   return <UserContext.Provider value={value} {...props} />;
 };
 
+// hook : we can call it everywhere
 export const useUser = () => {
   const context = useContext(UserContext);
   if (context === undefined) {

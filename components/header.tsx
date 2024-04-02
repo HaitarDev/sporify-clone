@@ -7,8 +7,11 @@ import { IoMdHome, IoMdSearch } from "react-icons/io";
 import { IoSearch } from "react-icons/io5";
 import Image from "next/image";
 import { BiPlay } from "react-icons/bi";
+import useOpenModal from "@/hooks/useOpenModal";
 
 function Header() {
+  const { toggle } = useOpenModal();
+
   const router = useRouter();
   return (
     <div className=" bg-gradient-to-b from-emerald-600 py-10 px-6 space-y-5">
@@ -42,10 +45,16 @@ function Header() {
           </Link>
         </div>
         <div className="flex items-center gap-8">
-          <button className="text-white/90 hover:text-white/80 transition">
+          <button
+            onClick={toggle}
+            className="text-white/90 hover:text-white/80 transition"
+          >
             Sign up
           </button>
-          <button className="text-black px-6 py-2 rounded-full bg-white hover:opacity-75 transition font-semibold">
+          <button
+            onClick={toggle}
+            className="text-black px-6 py-2 rounded-full bg-white hover:opacity-75 transition font-semibold"
+          >
             Log in
           </button>
         </div>

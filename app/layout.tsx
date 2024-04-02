@@ -5,6 +5,7 @@ import Sidebar from "@/components/sidebar/sidebar";
 import { twMerge } from "tailwind-merge";
 import SupabaseProvider from "@/providers/SupabaseProvider";
 import UserProvider from "@/providers/UserProvider";
+import ModalProvider from "@/providers/ModalProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,6 +24,7 @@ export default function RootLayout({
       <body className={twMerge("flex", inter.className)}>
         <SupabaseProvider>
           <UserProvider>
+            <ModalProvider />
             <Sidebar />
             <main className="flex-1">{children}</main>
           </UserProvider>
