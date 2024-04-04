@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Sidebar from "@/components/sidebar/sidebar";
 import { twMerge } from "tailwind-merge";
-import SupabaseProvider from "@/providers/SupabaseProvider";
 import UserProvider from "@/providers/UserProvider";
 import ModalProvider from "@/providers/ModalProvider";
 
@@ -22,13 +21,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={twMerge("flex", inter.className)}>
-        <SupabaseProvider>
-          <UserProvider>
-            <ModalProvider />
-            <Sidebar />
-            <main className="flex-1">{children}</main>
-          </UserProvider>
-        </SupabaseProvider>
+        {/* <SupabaseProvider> */}
+        <UserProvider>
+          <ModalProvider />
+          <Sidebar />
+          <main className="flex-1">{children}</main>
+        </UserProvider>
+        {/* </SupabaseProvider> */}
       </body>
     </html>
   );

@@ -18,6 +18,8 @@ interface ModalAuthProps {
 export function ModalAuth({ children, description, title }: ModalAuthProps) {
   const { isOpen, toggle } = useOpenModal();
 
+  console.log(isOpen);
+
   return (
     <Dialog open={isOpen} onOpenChange={toggle}>
       <DialogContent className="w-full h-full md:h-fit md:max-w-[425px]">

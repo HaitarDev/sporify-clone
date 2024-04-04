@@ -4,15 +4,34 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { RiArrowLeftSLine, RiArrowRightSLine } from "react-icons/ri";
 import { IoMdHome, IoMdSearch } from "react-icons/io";
-import { IoSearch } from "react-icons/io5";
 import Image from "next/image";
 import { BiPlay } from "react-icons/bi";
 import useOpenModal from "@/hooks/useOpenModal";
+import useIsUserLogging from "@/hooks/useSession";
+import { useEffect } from "react";
 
+import { createClient } from "@/utils/supabase/client";
+import { User2 } from "lucide-react";
 function Header() {
   const { toggle } = useOpenModal();
-
+  const { user, setUser } = useIsUserLogging();
   const router = useRouter();
+  const supabase = createClient();
+
+  const session = user?.data.user;
+
+  useEffect(() => {
+    setUser();
+  }, [setUser, supabase.auth]);
+
+  const handleLogout = async () => {
+    const { error } = await supabase.auth.signOut();
+    console.log(user);
+    router.refresh();
+
+    if (error) console.log(error);
+  };
+
   return (
     <div className=" bg-gradient-to-b from-emerald-600 py-10 px-6 space-y-5">
       <div className="flex justify-between items-center">
@@ -45,18 +64,39 @@ function Header() {
           </Link>
         </div>
         <div className="flex items-center gap-8">
-          <button
-            onClick={toggle}
-            className="text-white/90 hover:text-white/80 transition"
-          >
-            Sign up
-          </button>
-          <button
-            onClick={toggle}
-            className="text-black px-6 py-2 rounded-full bg-white hover:opacity-75 transition font-semibold"
-          >
-            Log in
-          </button>
+          <>
+            {session ? (
+              <>
+                <button
+                  onClick={handleLogout}
+                  className="text-black px-6 py-2 rounded-full bg-white hover:opacity-75 transition font-semibold"
+                >
+                  logout
+                </button>
+                <button
+                  className="text-black p-2 rounded-full bg-white hover:opacity-75 transition font-semibold"
+                  onClick={() => router.push("/account")}
+                >
+                  <User2 size={26} />
+                </button>
+              </>
+            ) : (
+              <>
+                <button
+                  onClick={toggle}
+                  className="text-white/90 hover:text-white/80 transition"
+                >
+                  Sign up
+                </button>
+                <button
+                  onClick={toggle}
+                  className="text-black px-6 py-2 rounded-full bg-white hover:opacity-75 transition font-semibold"
+                >
+                  Log in
+                </button>
+              </>
+            )}
+          </>
         </div>
       </div>
       <div className="space-y-4">

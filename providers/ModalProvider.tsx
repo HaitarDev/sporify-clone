@@ -3,6 +3,8 @@
 import { ModalAuth } from "@/components/modal-auth";
 import { useEffect, useState } from "react";
 
+import SupabaseAuthForm from "@/components/supabase-auth-form";
+
 function ModalProvider() {
   const [isMounted, setIsMounted] = useState(false);
 
@@ -15,7 +17,7 @@ function ModalProvider() {
   }
   return (
     <ModalAuth description="asd" title="Welcome back">
-      <div>children</div>
+      <SupabaseAuthForm />
     </ModalAuth>
   );
 }
